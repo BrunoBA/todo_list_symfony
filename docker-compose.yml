@@ -1,0 +1,30 @@
+version: "3"
+
+services:
+  db:
+    image: mysql:5.7
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: default
+      MYSQL_USER: default
+      MYSQL_PASSWORD: default
+    ports:
+      - "3306:3306"
+  web:
+    build:
+      context: .
+      dockerfile: ./docker/php/Dockerfile
+    container_name: php_web
+    depends_on:
+      - db
+    volumes:
+      - ./php/:/var/www/html/
+    expose:
+    - "8080"
+    - "8100"
+    ports:
+      - "8100:80"
+      - "8080:8080"
+    stdin_open: true
+    tty: true
