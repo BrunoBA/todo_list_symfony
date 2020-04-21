@@ -1,0 +1,19 @@
+
+
+
+
+###> symfony/framework-bundle ###
+php/todo_list/.env.local
+php/todo_list/.env.local.php
+php/todo_list/.env.*.local
+php/todo_list/config/secrets/prod/prod.decrypt.private.php
+php/todo_list/public/bundles/
+php/todo_list/var/
+php/todo_list/vendor/
+###< symfony/framework-bundle ###
+
+###> symfony/phpunit-bridge ###
+php/todo_list.phpunit
+php/todo_list.phpunit.result.cache
+php/todo_list/phpunit.xml
+###< symfony/phpunit-bridge ###
