@@ -1,6 +1,4 @@
-
-
-
+docker/mysql/*
 
 ###> symfony/framework-bundle ###
 php/todo_list/.env.local
@@ -10,6 +8,7 @@ php/todo_list/config/secrets/prod/prod.decrypt.private.php
 php/todo_list/public/bundles/
 php/todo_list/var/
 php/todo_list/vendor/
+php/todo_list/node_modules/
 ###< symfony/framework-bundle ###
 
 ###> symfony/phpunit-bridge ###

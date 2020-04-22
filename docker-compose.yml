@@ -11,6 +11,8 @@ services:
       MYSQL_PASSWORD: default
     ports:
       - "3306:3306"
+    volumes:
+      - ./docker/mysql:/var/lib/mysql
   web:
     build:
       context: .
@@ -21,8 +23,8 @@ services:
     volumes:
       - ./php/:/var/www/html/
     expose:
-    - "8080"
-    - "8100"
+      - "8080"
+      - "8100"
     ports:
       - "8100:80"
       - "8080:8080"

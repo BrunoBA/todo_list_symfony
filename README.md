@@ -16,7 +16,6 @@ composer create-project symfony/skeleton APP_NAME "^4.2"
 
 ```
 docker exec -it php_web /bin/sh
-
 ```
 
 ## Initialize the server
@@ -35,6 +34,19 @@ symfony serve --port=8080
 The most of commands are running for ```orm-pack```
 
 # Extra
+
+## Extra dependencies
+
+```
+composer require encore
+npm i --dev vue vue-loader@14.2.2 vue-template-compiler
+```
+
+https://symfony.com/doc/current/frontend/encore/installation.html
+https://symfony.com/doc/current/frontend/encore/simple-example.html
+http://zetcode.com/symfony/vue/
+https://github.com/iost-official/explorer/issues/1
+
 
 The [Composer](https://getcomposer.org/download) and [Symfony](https://symfony.com/download) was installed globally
 ## Xdebug

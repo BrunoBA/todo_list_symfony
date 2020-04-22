@@ -3,7 +3,22 @@ LABEL maintainer="brunobarros2014@gmail.com"
 
 WORKDIR /var/www/html/
 
-RUN apt-get update && apt-get install -y iputils-ping
+# replace shell with bash so we can source files
+RUN rm /bin/sh && ln -s /bin/bash /bin/sh
+
+RUN apt-get update && apt-get install python3 -y iputils-ping && apt-get install build-essential libssl-dev zlib1g-dev libncurses5-dev libgdbm-dev libnss3-dev libreadline-dev libffi-dev -y
+RUN echo "export PYTHON=/usr/bin/python3" >> ~/.bashrc && source ~/.bashrc
+
+ENV NVM_DIR /usr/local/nvm
+ENV NODE_VERSION 12
+
+# RUN curl --silent -o- https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash
+RUN curl --silent -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash
+
+RUN source $NVM_DIR/nvm.sh \
+    && nvm install $NODE_VERSION \
+    && nvm alias default $NODE_VERSION \
+    && nvm use default
 
 # Download script to install PHP extensions and dependencies
 ADD https://raw.githubusercontent.com/mlocati/docker-php-extension-installer/master/install-php-extensions /usr/local/bin/

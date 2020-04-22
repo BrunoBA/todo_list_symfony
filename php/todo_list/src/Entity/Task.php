@@ -22,7 +22,7 @@ class Task
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=10, options={"default":"foo bar"})php b
+     * @ORM\Column(type="string", length=10, options={"default":"foo bar"})
      */
     private $status;
 
