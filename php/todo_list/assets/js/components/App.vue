@@ -2,9 +2,11 @@
   <div>
     <h2 class="center">My Application!!!</h2>
     <div id="message" v-text="message"></div>
-    <ul>
-      <li :key="word.id" v-for="word in words">{{ word }}</li>
-    </ul>
+    <div class="col-md-6">
+      <ul class="list-group">
+        <li class="list-group-item" :key="word.id" v-for="word in words" >{{word}}</li>
+      </ul>
+    </div>
   </div>
 </template>
 

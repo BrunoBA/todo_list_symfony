@@ -1,3 +1,9 @@
-#index:
-#    path: /
-#    controller: App\Controller\DefaultController::index
+task_index:
+  path: /task/
+  controller: App\Controller\TaskController::index
+  methods: GET|HEAD
+
+api_task_index:
+  path: /api/task/
+  controller: App\Controller\Api\TaskController::index
+  methods: GET|HEAD

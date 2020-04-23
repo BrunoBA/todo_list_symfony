@@ -3,19 +3,22 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>
-			{% block title %}Welcome!
+			{% block title %}
+				Welcome!
 			{% endblock %}
 		</title>
 		{% block stylesheets %}
-			{{ encore_entry_link_tags('app') }}
+			{# {{ encore_entry_link_tags('app') }} #}
+			{{ encore_entry_link_tags('global') }}
 		{% endblock %}
 	</head>
 	<body>
 		<div id="app">
-        {% block body %}{% endblock %}	
-        </div>
-        {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
-        {% endblock %}
+			{% block body %}
+			{% endblock %}
+		</div>
 	</body>
+	{% block javascripts %}
+		{{ encore_entry_script_tags('app') }}
+	{% endblock %}
 </html>
