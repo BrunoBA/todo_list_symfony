@@ -1,7 +1,8 @@
 FROM php:7.4
 LABEL maintainer="brunobarros2014@gmail.com"
 
-WORKDIR /var/www/html/
+ARG WORKDIR_DEFAULT=/var/www/html/
+WORKDIR $WORKDIR_DEFAULT
 
 # replace shell with bash so we can source files
 RUN rm /bin/sh && ln -s /bin/bash /bin/sh
@@ -10,7 +11,8 @@ RUN apt-get update && apt-get install python3 -y iputils-ping && apt-get install
 RUN echo "export PYTHON=/usr/bin/python3" >> ~/.bashrc && source ~/.bashrc
 
 ENV NVM_DIR /usr/local/nvm
-ENV NODE_VERSION 12
+ARG NODE_VERSION=12.16.2
+ENV NODE_VERSION $NODE_VERSION
 
 # RUN curl --silent -o- https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash
 RUN curl --silent -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash

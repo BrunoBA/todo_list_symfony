@@ -17,6 +17,9 @@ services:
     build:
       context: .
       dockerfile: ./docker/php/Dockerfile
+      args:
+        - WORKDIR_DEFAULT=${WORKDIR_DEFAULT}
+        - NODE_VERSION=${NODE_VERSION}
     container_name: php_web
     depends_on:
       - db
