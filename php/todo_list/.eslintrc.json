@@ -1,0 +1,83 @@
+{
+  "root": true,
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  "parserOptions": {
+    "parser": "babel-eslint"
+  },
+  "extends": [
+    "plugin:vue/recommended"
+  ],
+  "plugins": [
+    "vue"
+  ],
+  "rules": {
+    "indent": [
+      "warn",
+      2
+    ],
+    "quotes": [
+      "warn",
+      "single"
+    ],
+    "no-var": [
+      "error"
+    ],
+    "no-console": [
+      "warn",
+      {
+        "allow": [
+          "warn",
+          "error"
+        ]
+      }
+    ],
+    "no-unused-vars": "warn",
+    "semi": [
+      "error",
+      "always"
+    ],
+    "prefer-template": "error",
+    "prefer-const": "error",
+    "arrow-parens": [
+      "error",
+      "always"
+    ],
+    "max-len": [
+      "error",
+      {
+        "code": 120,
+        "tabWidth": 2,
+        "ignoreComments": true,
+        "ignoreTrailingComments": true,
+        "ignoreTemplateLiterals": true
+      }
+    ],
+    "arrow-spacing": [
+      "warn",
+      {
+        "before": true,
+        "after": true
+      }
+    ],
+    "comma-dangle": [
+      "warn",
+      {
+        "arrays": "always-multiline",
+        "objects": "always-multiline",
+        "imports": "never",
+        "exports": "never",
+        "functions": "never"
+      }
+    ],
+    "no-multiple-empty-lines": [
+      "error",
+      {
+        "max": 1,
+        "maxEOF": 1
+      }
+    ]
+  }
+}

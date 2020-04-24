@@ -1,10 +1,25 @@
 <template>
   <div>
-    <h2 class="center">My Application!!!</h2>
-    <div id="message" v-text="message"></div>
-    <div class="col-md-6">
-      <ul class="list-group">
-        <li class="list-group-item" :key="word.id" v-for="word in words" >{{word}}</li>
+    <h2 class="d-flex justify-content-center">
+      Todo List
+    </h2>
+    <div class="col-md-12">
+      <ul class="task list-group">
+        <li
+          v-for="word in words"
+          :key="word"
+          class="list-group-item d-flex justify-content-between"
+        >
+          <span class="mr-5">
+            {{ word }}
+          </span>
+          <button
+            type="button"
+            class="btn btn-danger"
+          >
+            Danger
+          </button>
+        </li>
       </ul>
     </div>
   </div>
@@ -14,21 +29,18 @@
 export default {
   data() {
     return {
-      message: "A list of words!!",
-      words: []
+      words: ['A', 'list', 'of', 'words!ytfiusytfiuystdiyftsiduyftiudy!'],
     };
   },
-  mounted() {
-    let el = document.querySelector("#message");
-    let mywords = el.textContent.split(" ");
-
-    this.words.push.apply(this.words, mywords);
-  }
+  created() {
+    const nome = 'bruno';
+    console.log('teste');
+  },
 };
 </script>
 
 <style>
-.center {
-  text-align: center;
+.task {
+  min-width: 50%;
 }
 </style>
