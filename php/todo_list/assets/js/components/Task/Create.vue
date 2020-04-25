@@ -1,11 +1,14 @@
 <template>
   <div>TASK</div>
 </template>
-
 <script>
+
+import store from "../../store";
+
 export default {
   created() {
-    console.log('Task');
+    console.log(store);
+    
   },
 };
 </script>

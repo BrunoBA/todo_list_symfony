@@ -3,8 +3,17 @@
 {% block title %}
 	Tasks
 {% endblock %}
+{% block main_title %}
+	<div class="container_fluid">
+		<div class="d-flex justify-content-center">
+			<h1>
+				Todo List
+			</h1>
+		</div>
+	</div>
+{% endblock %}
 {% block body %}
 	<div class="d-flex justify-content-center">
-		<app></app>
+		<task-create/>
 	</div>
 {% endblock %}

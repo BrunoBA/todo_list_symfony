@@ -26,6 +26,8 @@
 </template>
 
 <script>
+import VueTimepicker from 'vue2-timepicker'
+
 export default {
   data() {
     return {
