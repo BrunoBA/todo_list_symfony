@@ -85,7 +85,14 @@ config.plugins.push(
          proxy: 'http://localhost:8080',
          files: [ // watch on changes
             {
-               match: ['public/build/**/*.js'],
+               match: [
+                  // 'public/build/**/*.js',
+                  'templates/**/*.twig',
+                  'assets/js/**/*.(scss|css|js|php|vue)',
+                  'assets/js/**/**/*.(scss|css|js|php|vue)',
+                  'assets/js/**/**/**/*.(scss|css|js|php|vue)',
+                  'assets/js/**/**/**/**/*.(scss|css|js|php|vue)',
+               ],               
                fn: function (event, file) {
                   if (event === 'change') {
                      const bs = require('browser-sync').get('bs-webpack-plugin');

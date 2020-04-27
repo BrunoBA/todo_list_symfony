@@ -1,12 +1,10 @@
-import axios from "axios";
+import axios from 'axios';
+import { HOST_PREFIX } from './index.js';
+
+const API_NAME = 'task';
 
 export default {
-  create(message) {
-    return axios.post("/api/posts", {
-      message: message
-    });
-  },
   findAll() {
-    return axios.get("/api/posts");
-  }
+    return axios.get(`${HOST_PREFIX}/${API_NAME}/`);
+  },
 };

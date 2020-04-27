@@ -1,97 +1,162 @@
 <template>
   <div>
-    {{step}}
     <div class="row">
       <div class="input-group mb-6">
-        
         <template v-if="step == 1">
           <div class="input-group-prepend">
-            <span class="input-group-text" id="inputGroup-sizing-default">Name</span>
+            <span
+              id="inputGroup-sizing-default"
+              class="input-group-text"
+            >Name</span>
           </div>
           <input
-            v-model="taskName"
+            v-model="task.name"
             type="text"
             class="form-control"
             aria-label="Default"
             aria-describedby="inputGroup-sizing-default"
             @keyup.enter="incrementStep()"
-          />
+          >
         </template>
         <template v-if="step == 2">
           <div class="input-group-prepend">
-            <span class="input-group-text" id="inputGroup-sizing-default">Day</span>
+            <span
+              id="inputGroup-sizing-default"
+              class="input-group-text"
+            >Day</span>
           </div>
           <Datepicker
-            v-model="taskDate"
+            v-model="task.date"
             :format="'dd/MM/yyyy'"
             :bootstrap-styling="true"
             input-class="enable form-control"
             @keyup.enter="incrementStep()"
-          ></Datepicker>
+          />
         </template>
         <template v-if="step == 3">
           <div class="input-group-prepend">
-            <span class="input-group-text" id="inputGroup-sizing-default">Hour</span>
+            <span
+              id="inputGroup-sizing-default"
+              class="input-group-text"
+            >Hour</span>
           </div>
           <VueTimepicker
-            v-model="taskHour"
+            v-model="task.hour"
             :readonly="false"
-            :minute-interval="5"
+            :minute-interval="minuteInterval"
             :bootstrap-styling="true"
             :close-on-complete="true"
             :clear-button-icon="'fa fa-trash'"
             input-class="enable form-control"
             @keyup.enter="incrementStep()"
-          ></VueTimepicker>
+          />
         </template>
       </div>
     </div>
-    <div class="d-flex justify-content-around mt-2">
-      <div v-if="step > 1" @click="decrementStep()" class="btn btn-primary">Back</div>
-      <div @click="incrementStep()" class="btn btn-success">Select Day</div>
+    <div class="row">
+      <div class="col-md-12">
+        <div
+          :class="{'justify-content-between': step != 1 , 'justify-content-center': step == 1}"
+          class="d-flex mt-2"
+        >
+          <div
+            v-if="step > 1"
+            class="btn btn-primary"
+            @click="decrementStep()"
+          >
+            Back
+          </div>
+          <div
+            class="btn btn-success"
+            @click="incrementStep()"
+          >
+            <template v-if="(step == 3 && loading == false)">
+              Create
+            </template>
+            <template v-else-if="(step < 3 && loading == false)">
+              Next
+            </template>
+            <template v-else-if="loading == true">
+              <i class="fa fa-circle-o-notch fa-spin fa-fw" />
+            </template>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 <script>
-import VueTimepicker from "vue2-timepicker";
-import Datepicker from "vuejs-datepicker";
+import VueTimepicker from 'vue2-timepicker';
+import Datepicker from 'vuejs-datepicker';
+import store from '../../store';
 
-import store from "../../store";
+const MINUTE_INTERVAL = 5;
 
 export default {
   components: {
     VueTimepicker,
-    Datepicker
+    Datepicker,
   },
   data() {
     return {
       step: 1,
-      taskName: "",
-      taskDate: "",
-      taskHour: ""
+      task: {
+        name: '',
+        date: '',
+        hour: this.defaultCurrentTime(),
+      },
+      minuteInterval: MINUTE_INTERVAL,
+      loading: false,
     };
   },
   created() {
-    console.log(store);
+    store.commit('TASK/INITIZALIZE');
   },
   mounted() {
     this.clearWrongClassesAndProeperties();
   },
   methods: {
     clearWrongClassesAndProeperties() {
-      document.getElementsByClassName("enable").forEach(element => {
-        element.removeAttribute("readonly");
-        element.classList.remove("display-time");
-        console.log(element);
+      document.getElementsByClassName('enable').forEach((element) => {
+        element.removeAttribute('readonly');
+        element.classList.remove('display-time');
       });
     },
-    incrementStep() {
-      this.step += 1;
+    defaultCurrentTime() {
+      const currentDate = new Date().toLocaleTimeString().split(':');
+      const hour = currentDate[0];
+      const min = Number(currentDate[1]);
+
+      let formatedMin = min - (min % MINUTE_INTERVAL);
+      formatedMin = formatedMin > 9 ? formatedMin : `0${formatedMin}`;
+
+      return `${hour}:${formatedMin}`;
+    },
+    async incrementStep() {
+      if (this.step >= 3) {
+        this.loading = true;
+        await this.submit();
+        this.resetFields();
+        this.loading = false;
+      } else {
+        this.step += 1;
+      }
     },
     decrementStep() {
       this.step -= 1;
-    }
-  }
+    },
+    resetFields() {
+      this.step = 1;
+      this.task = {
+        name: '',
+        date: '',
+        hour: this.defaultCurrentTime(),
+      };
+    },
+    submit() {
+      return store.dispatch('TASK/INSERT', this.task);
+    },
+  },
 };
 </script>
 

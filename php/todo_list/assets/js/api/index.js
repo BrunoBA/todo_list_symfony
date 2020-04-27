@@ -1,0 +1,1 @@
+export const HOST_PREFIX = 'http://localhost:8081/api';

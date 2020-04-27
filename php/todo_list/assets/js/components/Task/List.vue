@@ -1,24 +1,23 @@
 <template>
-  <div>
-    <h2 class="d-flex justify-content-center">
-      Todo List
-    </h2>
+  <div class="mt-3">
     <div class="col-md-12">
       <ul class="task list-group">
         <li
-          v-for="word in words"
-          :key="word"
+          v-for="task in tasks"
+          :key="task.name"
           class="list-group-item d-flex justify-content-between"
         >
-          <span class="mr-5">
-            {{ word }}
+          <span class="w-50 m-2 align-middle">{{ reduceString(task.name) }}</span>
+          <span class="m-2 align-middle">{{ task.date.toLocaleDateString() }}</span>
+          <span class="m-2 align-middle">{{ task.hour }}</span>
+          <span class="del-btn-default m-2 align-middle text-right">
+            <button
+              type="button"
+              class="btn btn-danger"
+            >
+              Danger
+            </button>
           </span>
-          <button
-            type="button"
-            class="btn btn-danger"
-          >
-            Danger
-          </button>
         </li>
       </ul>
     </div>
@@ -26,23 +25,31 @@
 </template>
 
 <script>
-import VueTimepicker from 'vue2-timepicker'
+import store from '../../store';
+
+const MAX_LENGTH = 250;
 
 export default {
   data() {
-    return {
-      words: ['A', 'list', 'of', 'words!ytfiusytfiuystdiyftsiduyftiudy!'],
-    };
+    return {};
+  },
+  computed: {
+    tasks() {
+      return store.state.TASK.list;
+    },
   },
   created() {
-    const nome = 'bruno';
-    console.log('teste');
+  },
+  methods: {
+    reduceString (text) {
+      return (text.length > MAX_LENGTH) ? `${text.substring(0, MAX_LENGTH)  }...` : text;
+    },
   },
 };
 </script>
 
 <style>
-.task {
-  min-width: 50%;
+.del-btn-default {
+  max-height: 50px;
 }
 </style>
